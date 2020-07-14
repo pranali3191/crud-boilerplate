@@ -27,14 +27,8 @@ userSchema.plugin(autoIncrement.plugin, {
   startAt: 10001,
 });
 
-const User = mongoose.model('User', userSchema);
-
-// encrypt password before save
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
   const user = this;
-  console.log('this');
-  console.log(this);
-
   bcrypt.hash(user.password, 10, (err, hash) => {
     if (err) {
       next(err);
@@ -44,5 +38,8 @@ userSchema.pre('save', (next) => {
     }
   });
 });
+const User = mongoose.model('User', userSchema);
+
+// encrypt password before save
 
 module.exports = User;

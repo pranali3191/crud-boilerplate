@@ -85,11 +85,17 @@ if (c.db.required) {
   if (c.db.password)
     mongoose.connect(
       `mongodb://${c.db.username}:${c.db.password}@${c.db.host}/${c.db.name}`,
-      { useMongoClient: true }
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      }
     );
   else {
     mongoose.connect(`mongodb://${c.db.host}/${c.db.name}`, {
-      useMongoClient: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
     });
   }
   const db = mongoose.connection;

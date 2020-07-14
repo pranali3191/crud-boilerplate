@@ -20,11 +20,10 @@ exports.listById = (model, req) => {
 
 exports.create = (model, req) => {
   return new Promise((resolve, reject) => {
-    return model.create(req.body, (err, items) => {
+    const doc = new model(req.body);
+    return doc.save((err) => {
       if (err) return reject(new Error(err));
-      if (!items)
-        return reject(new Error(`Error while creating ${model} document.`));
-      return resolve(items);
+      return resolve(doc);
     });
   });
 };
