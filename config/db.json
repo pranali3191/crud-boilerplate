@@ -1,0 +1,23 @@
+{
+  "development": {
+    "name": "crud-assignment-db_dev",
+    "username": "",
+    "password": "",
+    "host": "localhost:27017",
+    "required": true
+  },
+  "staging": {
+    "name": "crud-assignment-db_staging",
+    "username": "",
+    "password": "",
+    "host": "localhost:27017",
+    "required": true
+  },
+  "production": {
+    "name": "crud-assignment-db_prod",
+    "username": "",
+    "password": "",
+    "host": "localhost:27017",
+    "required": true
+  }
+}

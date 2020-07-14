@@ -1,0 +1,52 @@
+exports.list = (model) => {
+  return new Promise((resolve, reject) => {
+    return model.find().exec((err, items) => {
+      if (err) return reject(new Error(err));
+      if (!items) return reject(new Error(`No ${model} Found`));
+      return resolve(items);
+    });
+  });
+};
+
+exports.listById = (model, req) => {
+  return new Promise((resolve, reject) => {
+    return model.findById(req.params.id).exec((err, items) => {
+      if (err) return reject(new Error(err));
+      if (!items) return reject(new Error(`No ${model} Found`));
+      return resolve(items);
+    });
+  });
+};
+
+exports.create = (model, req) => {
+  return new Promise((resolve, reject) => {
+    return model.create(req.body, (err, items) => {
+      if (err) return reject(new Error(err));
+      if (!items)
+        return reject(new Error(`Error while creating ${model} document.`));
+      return resolve(items);
+    });
+  });
+};
+
+exports.update = (model, req) => {
+  return new Promise((resolve, reject) => {
+    return model
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .exec((err, items) => {
+        if (err) return reject(new Error(err));
+        if (!items) return reject(new Error(`No ${model} document Found`));
+        return resolve(items);
+      });
+  });
+};
+
+exports.delete = (model, req) => {
+  return new Promise((resolve, reject) => {
+    return model.deleteOne({ _id: req.params.id }).exec((err, items) => {
+      if (err) return reject(new Error(err));
+      if (!items) return reject(new Error(`No ${model} document Found`));
+      return resolve(items);
+    });
+  });
+};
